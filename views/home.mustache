@@ -1,0 +1,52 @@
+<div id='home' class='column'>
+  <div class='row'>
+    <nav>
+      {{#currentScriptId}}
+        <a href="/script/{{.}}/reading">
+          <button>Read Play</button>
+        </a>
+      {{/currentScriptId}}
+    </nav>
+
+    <ul class="scriptList">
+      {{#scripts}}
+        <li>
+          <a href="/script/{{id}}">
+            <button class="button-small">
+              {{title}}
+            </button>
+          </a>
+        </li>
+      {{/scripts}}
+    </ul>
+
+
+    <form action="/actors" method="post">
+      <input placeholder="enter actor's name" name="name" />
+      <button type='submit'>Add actor</button>
+    </form>
+  </div>
+  <div class='row'>
+    <ul id='actorList'>
+      <h3>Actors</h3>
+      {{#actors}}
+        <li>{{name}}</li>
+      {{/actors}}
+    </ul>
+
+    <div class='characterList'>
+      <h3>Characters in the play: </h3>
+      {{#characters}}
+        <h5>Name: {{name}}</h5>
+        <ul class='characterData'>
+          <li>Total Lines: {{lineCount}}</li>
+          <li>Amount Character Speaks: {{speaksNum}}</li>
+        </ul>
+      {{/characters}}
+      {{^characters}}
+        Select a play to view characters
+      {{/characters}}
+    </div>
+
+  </div>
+</div>

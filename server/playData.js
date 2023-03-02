@@ -17,7 +17,7 @@ function parseScript(playPath, title) {
   for (let i = 0; i < splitLines.length; i++) {
     // split lines further to character lines
     const characterLines = splitLines[i].split('\n');
-    fullPlay.push(characterLines);
+
 
     // get the character name and remove dot from the end
     let name = characterLines[0];
@@ -39,7 +39,12 @@ function parseScript(playPath, title) {
         // create character object
         characterObjs[name] = new Character(name, count - 1, 1);
       }
+
+      fullPlay.push({character: name, lineChunk: splitLines[i]});
+    } else {
+      fullPlay.push({lineChunk: splitLines[i]});
     }
+
   }
 
   function isUppercase(str) {

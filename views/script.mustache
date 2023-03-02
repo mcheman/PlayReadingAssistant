@@ -1,0 +1,22 @@
+<nav>
+  <a href="/">
+    <button>Select Play</button>
+  </a>
+</nav>
+
+<div id="scriptPage">
+  {{>scriptNav}}
+  <h2>script</h2>
+  <h5>Current Actor: {{currentActor.name}}</h5>
+  <div id="scriptDiv">
+    {{#lines}}
+      {{#isCurrentActor}}
+        <pre class="currentActor">{{lineChunk}}</pre>
+      {{/isCurrentActor}}
+
+      {{^isCurrentActor}}
+        <pre>{{lineChunk}}</pre>
+      {{/isCurrentActor}}
+    {{/lines}}
+  </div>
+</div>
