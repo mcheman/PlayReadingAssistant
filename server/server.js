@@ -3,12 +3,20 @@ const path = require('path');
 const scriptController = require('./scriptController.js');
 const actorController = require('./actorController');
 const cors = require('cors');
+const consolidate = require('consolidate');
 
 const app = express();
 
 const PORT = 3000;
 
 app.use(cors());
+
+// assign the mustache engine to .mustache files
+app.engine('mustache', consolidate.mustache);
+
+// set .mustache as the default extension
+app.set('view engine', 'mustache');
+app.set('views', __dirname + '/views');
 
 // parse the request body
 app.use(express.json());
