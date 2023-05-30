@@ -4,6 +4,7 @@ use axum::response::IntoResponse;
 use axum::{Json, Router};
 use axum::routing::get;
 use serde::Serialize;
+use serde_json::json;
 use sqlx::PgPool;
 
 pub fn routes<S>(state: PgPool) -> Router<S> {
@@ -24,8 +25,7 @@ struct Actor {
 async fn get_actors(State(pool): State<PgPool>) -> impl IntoResponse {
     let result = sqlx::query!("SELECT * FROM actors")
         .fetch_all(&pool)
-        .await
-        .map_err(internal_error);
+        .await;
 
     match result {
         Ok(result) => Ok(Json(result
@@ -38,7 +38,14 @@ async fn get_actors(State(pool): State<PgPool>) -> impl IntoResponse {
                 })
                 .collect::<Vec<_>>()
         )),
-        Err(result) => Err(result)
+        Err(result) => {
+            let msg = format!("{}", result);
+            Err(Json(json!(
+                {
+            "error": "{msg}"
+                }
+        )))
+        }
     }
 
     // if let Ok(result) = result {
