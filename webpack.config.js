@@ -38,6 +38,8 @@ module.exports = {
       '/api/actors': 'http://localhost:8000',
       '/api/characters': 'http://localhost:8000',
       '/api/positions': 'http://localhost:8000',
+      '/api/scripts/title': 'http://localhost:8000',
+      '/api/script/': 'http://localhost:8000',
       '!/public': 'http://localhost:3000',
     },
     // Compression must be disabled, otherwise server sent events never get sent. Compression waits for ALL the data
